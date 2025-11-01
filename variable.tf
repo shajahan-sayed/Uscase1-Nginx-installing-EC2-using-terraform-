@@ -14,7 +14,7 @@ variable "vpc_cidr" {
   description = "Attching cidr for vpc"
   type = string 
 }
-variable "public_subnet_cidr" {
+variable "Nginx1_subnet_cidr" {
   description = "attaching cidr for vpc"
   type = string
 }
