@@ -1,0 +1,7 @@
+instance_type = "t2.micro"
+ami_id = "ami-02b8269d5e85954ef"
+key_name ="auto1"
+vpc_cidr = "10.0.1.0/16"
+Nginx1_subnet_cidr = "10.0.2.0/24
+aws_region = "ap-south-1"
+availability_zone = "ap-south-1a"
