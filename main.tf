@@ -9,7 +9,7 @@ resource "aws_vpc" "Nginx1" {
 
 #creating subnet
 resource "aws_subnet" "Nginx1_subnet" {
-  vpc_id = aws_vpc.Nginx1
+  vpc_id = aws_vpc.Nginx1.id
   cidr_block = var.Nginx1_subnet_cidr
   availability_zone = var.availability_zone
   map_public_ip_on_launch = true
@@ -22,7 +22,7 @@ resource "aws_subnet" "Nginx1_subnet" {
 #creating Internet gate way
 
 resource "aws_internet_gateway" "Nginx1_igw" {
- vpc_id = aws_vpc.Nginx1
+ vpc_id = aws_vpc.Nginx1.id
 
  tags = {
   Name = "Nginx1_igw"
@@ -31,7 +31,7 @@ resource "aws_internet_gateway" "Nginx1_igw" {
 
 #creating route table
 resource "aws_route_table" "Nginx1_route_table" {
- vpc_id = aws_vpc.Nginx1
+ vpc_id = aws_vpc.Nginx1.id
 
  tags = { 
   Name = "Nginx1_route_table"
@@ -41,7 +41,7 @@ resource "aws_route_table" "Nginx1_route_table" {
 #creating route
 resource "aws_route" "Nginx1_route" {
  cidr_block = "0.0.0.0/0"
- route_table_id = aws_route_table.Nginx1_route_table
+ route_table_id = aws_route_table.Nginx1_route_table.id
  gateway_id = aws_internet_gateway.Nginx_igw.id
 }
 
@@ -56,7 +56,7 @@ resource "aws_route_table_association" "Nginx1_public_asso" {
 resource "aws_security_group" "Nginx1_sg" {
  name = "Nginx1_sg"
  description = "allow HTTP and SSH"
- vpc_id = aws_vpc.Nginx1
+ vpc_id = aws_vpc.Nginx1.id
 
 ingress {
 description = "Allow SSH port"
@@ -96,7 +96,7 @@ cidr_blocks = ["0.0.0.0/0"]
 resource "aws_instance" "Nginx1_ec2" {
  instance_type = var.instance_type
  ami           = var.ami_id
- subnet_id     = aws_subnet.Nginx1_subnet
+ subnet_id     = aws_subnet.Nginx1_subnet.id
  key_name      = var.key_name
  security_groups = [aws.security_group.Nginx1_sg.id]
 
