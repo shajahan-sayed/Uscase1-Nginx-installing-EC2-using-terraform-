@@ -47,8 +47,8 @@ resource "aws_route" "Nginx1_route" {
 
 #creating route table association
 resource "aws_route_table_association" "Nginx1_public_asso" {
- subnet_id = aws_subnet.Nginx1_subnet
- route_table_id = aws_route_table.Nginx1_route_table
+ subnet_id = aws_subnet.Nginx1_subnet.id
+ route_table_id = aws_route_table.Nginx1_route_table.id
 }
 
 #creating security group
