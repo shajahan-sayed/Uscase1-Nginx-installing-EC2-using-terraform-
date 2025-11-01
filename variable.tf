@@ -23,4 +23,9 @@ variable "Nginx1_subnet_cidr" {
   type = string
 }
 
+variable "availability_zone" {
+  description = "Availability zone for subnet"
+  type        = string
+}
+
   
