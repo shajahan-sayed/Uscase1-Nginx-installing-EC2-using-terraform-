@@ -1,3 +1,7 @@
+variable "aws_region" {
+  description = "AWS region to deploy resources"
+  type        = string
+}
 variable "instance_type"{
   description = "attaching instance type"
   type = string
