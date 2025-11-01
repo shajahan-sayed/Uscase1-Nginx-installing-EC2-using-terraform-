@@ -42,7 +42,7 @@ resource "aws_route_table" "Nginx1_route_table" {
 resource "aws_route" "Nginx1_route" {
  cidr_block = "0.0.0.0/0"
  route_table_id = aws_route_table.Nginx1_route_table.id
- gateway_id = aws_internet_gateway.Nginx_igw.id
+ gateway_id = aws_internet_gateway.Nginx1_igw.id
 }
 
 #creating route table association
@@ -98,7 +98,7 @@ resource "aws_instance" "Nginx1_ec2" {
  ami           = var.ami_id
  subnet_id     = aws_subnet.Nginx1_subnet.id
  key_name      = var.key_name
- security_groups = [aws.security_group.Nginx1_sg.id]
+ security_groups = [aws_security_group.Nginx1_sg.id]
 
  user_data = <<-EOF
               #!/bin/bash
