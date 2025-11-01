@@ -42,7 +42,7 @@ resource "aws_route_table" "Nginx1_route_table" {
 resource "aws_route" "Nginx1_route" {
  cidr_block = "0.0.0.0/0"
  route_table_id = aws_route_table.Nginx1_route_table
- gateway_id = aws_internet_gateway_id.Nginx_igw
+ gateway_id = aws_internet_gateway.Nginx_igw
 }
 
 #creating route table association
@@ -54,7 +54,7 @@ resource "aws_route_table_association" "Nginx1_public_asso" {
 #creating security group
 
 resource "aws_security_group" "Nginx1_sg" {
- Name = "Nginx1_sg"
+ name = "Nginx1_sg"
  description = "allow HTTP and SSH"
  vpc_id = aws_vpc.Nginx1
 
@@ -63,7 +63,7 @@ description = "Allow SSH port"
 from_port = 22
 to_port = 22
 protocol = "tcp"
-cidr_block = ["0.0.0.0/0"]
+cidr_blocks = ["0.0.0.0/0"]
 }
 
 ingress {
@@ -71,7 +71,7 @@ description = "allow Http port"
 from_port = 80
 to_port = 80
 protocol = "tcp"
-cidr_block = ["0.0.0.0/0"]
+cidr_blocks = ["0.0.0.0/0"]
 }
 
 egress {
@@ -79,7 +79,7 @@ description = "allow all outbound"
 from_port = 0
 to_port = 0
 protocol = "-1"
-cidr_block = ["0.0.0.0/0"]
+cidr_blocks = ["0.0.0.0/0"]
 }
 
  tags = {
@@ -98,7 +98,7 @@ resource "aws_instance" "Nginx1_ec2" {
  ami           = var.ami_id
  subnet_id     = aws_subnet.Nginx1_subnet
  key_name      = var.key_name
- security_groups = [aws.security_group.Nginx1_sg]
+ security_groups = [aws.security_group.Nginx1_sg.name]
 
  user_data = <<-EOF
               #!/bin/bash
