@@ -40,7 +40,7 @@ resource "aws_route_table" "Nginx1_route_table" {
 
 #creating route
 resource "aws_route" "Nginx1_route" {
- cidr_block = "0.0.0.0/0"
+ destination_cidr_block = "0.0.0.0/0"
  route_table_id = aws_route_table.Nginx1_route_table.id
  gateway_id = aws_internet_gateway.Nginx1_igw.id
 }
